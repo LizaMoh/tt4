@@ -1,4 +1,5 @@
-const tabs = document.querySelectorAll('.tabheader__item');
+window.addEventListener('DOMContentLoaded',()=>{
+    const tabs = document.querySelectorAll('.tabheader__item');
 const tabContent = document.querySelectorAll('.tabcontent');
 const tabParent = document.querySelector('.tabheader');
 
@@ -163,7 +164,7 @@ function calcTotal(){
 }
 calcTotal();
 function getStaticInformation(parentSelector,activeClass){
-    const elements = document.querySelectorAll('${parentSelector} div');
+    const elements = document.querySelectorAll(`${parentSelector} div`);
 
     elements.forEach(elem =>{
         elem.addEventListener('click',(e)=>{
@@ -184,3 +185,26 @@ function getStaticInformation(parentSelector,activeClass){
 }
 getStaticInformation('#gender','calculating__choose-item_active');
 getStaticInformation('.calculating__choose_big','calculating__choose-item_active');
+
+function getDynamicInformation(selector){
+    const input = document.querySelector(selector);
+    input.addEventListener('input',()=>{
+        switch(input.getAttribute('id')){
+            case 'height':
+                height = +input.value;
+                break;
+                case 'weight':
+                    weight = +input.value;
+                    break;
+                case 'age':
+                    age = +input.value;
+                    break;
+        }
+    })
+    calcTotal();
+}
+getDynamicInformation('#height');
+getDynamicInformation('#weight');
+getDynamicInformation('#age');
+})
+
